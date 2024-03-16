@@ -1,0 +1,90 @@
+<div class="pt-10 bg-orange-100">
+  
+    <div class="my-20 flex justify-center items-center">
+        <div class="gallery w-full flex  justify-around items-center gap-20">
+            <div>
+                <button class="arrow" (click)="prevImage()">
+
+                    <mat-icon class="font-bold">
+                        arrow_back_ios
+                    </mat-icon>   
+                  
+                </button>
+            </div>
+            
+
+            <div class="">
+                <img [src]="currentImage" alt="" style="height: 680px;" class="rounded-lg">
+            </div>
+           <div>
+            <button class="arrow" (click)="nextImage()"> 
+                 <mat-icon class="font-bold">
+                arrow_forward_ios
+               </mat-icon></button>
+           </div>
+            
+        </div>
+    </div>
+
+    <div class="grid grid-cols-5 gap-4">
+        <div>
+             <img src="../../../assets/download (1).jpeg" style="height: 320px;" class="rounded-lg" alt="">
+        </div>
+        
+        <div>
+            <img src="../../../assets/download (2).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+       </div>
+
+       <div>
+        <img src="../../../assets/download (3).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+       </div>
+
+        <div>
+            <img src="../../../assets/download (4).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+        <img src="../../../assets/download (5).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/download (6).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/download.jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/images (1).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/images (2).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/images (3).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/images (4).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/images (5).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+        <div>
+            <img src="../../../assets/images (6).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+    
+        <div>
+            <img src="../../../assets/images (6).jpeg" alt="" style="height: 320px;" class="rounded-lg">
+        </div>
+
+    </div>
+
+    <app-footer class="relative bottom-0 max-h-10"></app-footer>
+</div>

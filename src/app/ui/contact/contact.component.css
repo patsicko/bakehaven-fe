@@ -1,0 +1,11 @@
+.background {
+    background-image: url("../../../assets/catbanner.png");
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 12px; 
+    color: white; 
+    height: 100vh;
+    
+    
+  }

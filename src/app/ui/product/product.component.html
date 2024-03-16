@@ -1,0 +1,138 @@
+<div class="bg-gray-200">
+  
+    <div>
+
+        <div class="background">
+            <div class="text text-2xl">
+            <p>Highly versatile and sought-after option for professional cake decorators,</p>
+            <p>delivering a seamless and impeccable appearance to cakes. <br> Experience the exquisite craft of</p>
+            <p>cake decoration with Bakehaven's high-quality</p>
+            </div>
+        </div>
+
+
+        <div class="text-3xl font-bold m-8">
+            Today Best Deals for You!
+        </div>
+
+   
+
+        <div *ngIf="singleProduct" class="w-full z-50 flex   justify-center items-center gap-6 mx-8 px-8 ">
+            <div class="w-3/4 bg-gray-100 p-2  flex justify-center items-center gap-4 ">
+                <div class="w-1/2 h-auto">
+                    <img src="../../../assets/prodcake.png" alt="">
+                </div>
+
+                <div class="bg-gray w-1/2">
+                    <div class="font-bold text-3xl">
+                    Cake
+                    </div>
+                    <div class="text-2xl font-medium pt-4 w-1/2">
+                    The best product made with safe sweet products, 
+                        it is flexible easy to carry and have low price, 
+                        buy it from my shop,quick delivery is guaranteed.
+                    </div>
+                    <div class="mt-4 text-3xl">
+                        ⭐️⭐️⭐️⭐️⭐️
+                    </div>
+                    <hr class="border border-5 border-gray-400 my-4 w-1/2">
+                    <div class="flex items-center rounded-md">
+                        <button type="button" class="px-3 py-1 bg-gray-200 rounded-l-lg text-4xl font-bold" (click)="decrement()">-</button>
+                        <input type="number" id="quantity" name="quantity" min="1" [(ngModel)]="quantity" class="w-16 text-center text-3xl font-bold">
+                        <button type="button" class="px-3 py-1 bg-gray-200 rounded-r-lg text-3xl font-bold" (click)="increment()">+</button>
+                    </div>
+
+                    <div class="mb-4 py-4 flex gap-6">
+                        <button class="border border-3 border-black rounded-2xl px-12 py-2 bg-green-950 text-white">
+                            Add to cart
+                        </button>
+
+                        <button class="border border-3 border-black rounded-2xl px-16 py-2">
+                            By now
+                        </button>
+            
+                    </div>
+                    
+                    <div class="flex flex-col border h-auto justify-center items-start p-4 "> 
+                        <div class="text-xl font-bold">Delivery</div>
+                        <div class="flex items-center justify-center gap-6 mt-6">
+                            <mat-icon class="text-orange-950 ">
+                                local_shipping
+                            </mat-icon>
+                            <div class="text-md font-medium">
+                                Delivery within less than one day
+                            </div>
+                        </div>
+                        <hr class="border border-5 border-gray-400 my-4 w-1/2">
+
+                        <div class="text-xl font-bold">Return delivery</div>
+                        <div class="flex items-center justify-center gap-6 mt-6">
+                            <mat-icon class="text-orange-950 ">
+                                assignment_return
+                            </mat-icon>
+                            <div class="text-md font-medium">
+                                Delivery within less than one day
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="flex justify-start items-center p-4 my-32 mx-8">
+            <ul class="flex flex-col md:flex-row justify-around items-center  gap-4 w-full  md:w-1/2  p-4">
+                <li><button class="bg-green-800 px-10 py-1 text-2xl text-white rounded-md"  (click)="showAllProducts()">All</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Cakes</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Cupcakes</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Weeding </button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Snacks</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Ibiraha</button></li>
+            </ul>
+        </div>
+
+
+
+   <div *ngIf="allProducts" class="flex flex-col md:flex-row gap-4 justify-around items-center p-4 my-32" >
+
+    <div class="flex flex-wrap justify-center">
+        <div *ngFor="let product of products" class="h-auto w-96 flex flex-col justify-between items-center bg-white rounded-lg shadow-lg overflow-hidden m-4">
+          <div class="w-full bg-gray-100 pt-2" (click)="showSingle()">
+            <img class="w-full h-64 object-cover" [src]="product.image" alt="{{ product.title }}">
+          </div>
+          <div class="flex justify-between items-center px-4 py-2 bg-gray-100 gap-20 mt-4">
+            <div class="text-lg font-semibold text-gray-800">{{ product.title }}</div>
+            <div class="text-lg font-semibold text-gray-800">{{ product.price }}</div>
+          </div>
+          <div>
+            {{ product.description }}
+          </div>
+          <div>
+            {{ product.rating }}
+          </div>
+          <div class="mb-4 py-4">
+            <button class="border border-3 border-black rounded-2xl px-12 py-2">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+      
+
+   
+   </div>
+   
+</div>
+
+
+
+
+
+
+<app-footer class="relative bottom-0 max-h-10"></app-footer>
+  
+</div>
