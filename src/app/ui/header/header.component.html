@@ -1,3 +1,7 @@
+<div>
+<app-signup *ngIf="showSignupForm"></app-signup>
+<app-login *ngIf="showLoginForm"></app-login>
+<app-product-form *ngIf="showProductForm"></app-product-form>
 
 <div class="bg-[#826D5E] p-8 text-white text-2xl flex items-center justify-around z-50 ">
   
@@ -9,10 +13,13 @@
         <li><a routerLink="contact">Contact</a></li>
     </ul>
     <ul class="flex flex-col md:flex-row items-center justify-between gap-8 ">
-        <li><button>Signup</button></li>
-        <li><button>Login</button></li>
+        <li *ngIf="!isLogged"><button (click)="showSignup(true)">Signup</button></li>
+        <li *ngIf="!isLogged"><button (click)="showLogin(true)">Login</button></li>
+        <li *ngIf="isLogged"><button (click)="logout()">Logout</button></li>
     </ul>
  
+</div>
+
 </div>
 
 

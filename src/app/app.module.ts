@@ -18,6 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { SignupComponent } from './ui/signup/signup.component';
 import { LoginComponent } from './ui/login/login.component';
+import { IncomeChartComponent } from './ui/income-chart/income-chart.component';
+import { ProductFormComponent } from './ui/product-form/product-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -34,6 +37,8 @@ import { LoginComponent } from './ui/login/login.component';
     DashboardComponent,
     SignupComponent,
     LoginComponent,
+    IncomeChartComponent,
+    ProductFormComponent,
     
    
   ],
@@ -41,6 +46,7 @@ import { LoginComponent } from './ui/login/login.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatIconModule,
     ToastrModule.forRoot({
       timeOut: 1000,

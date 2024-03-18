@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     '../../../assets/images (3).jpeg'
 
    
-    // Add more image paths here
+    
   ];
   currentImageIndex: number = 0;
   currentImage: string | undefined;

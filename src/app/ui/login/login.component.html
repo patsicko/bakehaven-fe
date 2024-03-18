@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div  class="w-full flex justify-center items-center  bg-black h-screen top-0 left-0 bg-opacity-65">
+    <form [formGroup]="loginForm" class="bg-white bg-opacity-45 w-1/2 p-16 rounded-2xl ">
+        <div class="flex justify-between mb-12">
+            <div class="text-4xl font-border">Login</div>
+            <div>
+                <div class="bg-white rounded-md p-2" (click)="closeLogin(false)">
+                <mat-icon class=" text-red-600 font-bold">close</mat-icon>
+               </div>
+            </div>
+        </div>
+     
+      
+        <div class="mb-3 w-full text-3xl font-bold">
+            <label for="email" class="text-black">Email</label>
+            <input type="email" name="email" id="email" placeholder="email" formControlName="email" class="w-full h-16 rounded-xl px-4 py-2">
+            <span class="text-red-700" *ngIf="loginForm.get('email')?.hasError('required') && (loginForm.get('email')?.touched || isLoginSubmitted)">Email is required</span>
+            <span class="text-red-700" *ngIf="loginForm.get('email')?.hasError('email') && (loginForm.get('email')?.touched || isLoginSubmitted)">Please add a valid email</span>
+        </div>
+ 
+        <div class="mb-3 w-full text-3xl font-bold">
+            <label for="password" class="text-black">Password</label>
+            <input type="password" name="pasword" id="password" placeholder="password" formControlName="password" class="w-full h-16 rounded-xl px-4 py-2"> 
+            <span class="text-red-700" *ngIf="loginForm.get('password')?.hasError('required') && (loginForm.get('password')?.touched || isLoginSubmitted)">Password is required</span>
+        </div>
+     
+
+        <div class="mb-3 w-full">
+            <button type="button" class="w-full h-16 rounded-xl px-4 py-2 bg-blue-700 text-white text-2xl" (click)="submitLogin()">Signup</button>
+        </div>
+
+    </form>
+</div>

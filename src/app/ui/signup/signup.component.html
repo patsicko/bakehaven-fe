@@ -1,16 +1,46 @@
-<div>
-    Signup
-
-    <form [formGroup]="signupForm">
+<div  class="w-full flex justify-center items-center  bg-black h-screen top-0 left-0 bg-opacity-65">
+    <form [formGroup]="signupForm" class="bg-white bg-opacity-45 w-1/2 p-16 rounded-2xl ">
+        <div class="flex justify-between mb-12">
+            <div class="text-4xl font-border">Signup</div>
+            <div>
+                <div class="bg-white rounded-md p-2" (click)="closeSignupForm(false)">
+                <mat-icon class=" text-red-600 font-bold">close</mat-icon>
+               </div>
+            </div>
+        </div>
      
-        <div>
-            <label for="firstName">First Name</label>
-            <input type="text" name="firstName" id="firstName" placeholder="firstName">
+      <div class="flex w-full gap-4 text-2xl mb-6" >
+        <div class="mb-3 w-full text-3xl font-bold">
+            <label for="firstName" class="text-black">First Name</label>
+            <input type="text" name="firstName" id="firstName" placeholder="firstName" class="w-full h-16 rounded-xl px-4 py-2 outline-none" formControlName="firstName">
+            <span class="text-red-700" *ngIf="signupForm.get('firstName')?.hasError('required') && (signupForm.get('firstName')?.touched || isSubmitted)">First name is required</span>
         </div>
 
-        <div>
-            <label for="lastName">Last Name</label>
-            input:
+        <div class="mb-3 w-full text-3xl font-bold">
+            <label for="lastName" class="text-black">Last Name</label>
+            <input type="text" name="lastName" id="lastName" placeholder="lastName" formControlName="lastName" class="w-full h-16 rounded-xl px-4 py-2 outline-none">
+            <span class='text-red-700' *ngIf="signupForm.get('lastName')?.hasError('required') && (signupForm.get('lastName')?.touched || isSubmitted)">Last Name is required</span>
+
+        </div>
+      </div>
+
+      <div class="flex w-full gap-4 text-2xl mb-6 ">
+        <div class="mb-3 w-full text-3xl font-bold">
+            <label for="email" class="text-black">Email</label>
+            <input type="email" name="email" id="email" placeholder="email" formControlName="email" class="w-full h-16 rounded-xl px-4 py-2 outline-none">
+            <span class="text-red-700" *ngIf="signupForm.get('email')?.hasError('required') && (signupForm.get('email')?.touched || isSubmitted)">Email is required</span>
+            <span class="text-red-700" *ngIf="signupForm.get('email')?.hasError('email') && (signupForm.get('email')?.touched || isSubmitted)">Please add a valid email</span>
+        </div>
+
+        <div class="mb-3 w-full text-3xl font-bold">
+            <label for="password" class="text-black">Password</label>
+            <input type="password" name="pasword" id="password" placeholder="password" formControlName="password" class="w-full h-16 rounded-xl px-4 py-2 outline-none"> 
+            <span class="text-red-700" *ngIf="signupForm.get('password')?.hasError('required') && (signupForm.get('password')?.touched || isSubmitted)"> Password is required</span>
+        </div>
+      </div>
+
+        <div class="mb-3 w-full">
+            <button type="button" class="w-full h-16 rounded-xl px-4 py-2 bg-blue-700 text-white text-2xl" (click)="submitSignup()">Signup</button>
         </div>
 
     </form>
