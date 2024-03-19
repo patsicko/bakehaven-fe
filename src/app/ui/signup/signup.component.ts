@@ -34,8 +34,25 @@ this.authService.closeSignupClicked(value)
   }
 
   submitSignup(){
+    this.isSubmitted=true
     if(this.signupForm.valid){
-      console.log("signup data",this.signupForm.value)
+     
+
+      const createUserDTO=this.signupForm.value
+
+      this.authService.createUser(createUserDTO).subscribe({
+        next:(response)=>{
+          console.log("response from server",response)
+        },
+        error:(error)=>{
+         throw error.message
+        }
+        
+      })
+      this.signupForm.reset()
+      this.authService.closeSignupClicked(false)
+      this.authService.loginButtonClicked(true)
+     
 
     }
   }

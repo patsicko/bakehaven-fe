@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,16 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit{
   constructor(
     private toastr: ToastrService,
-    private authService:AuthService
+    private authService:AuthService,
+    private cartService: CartService
     ) {}
 
   showSignupForm:boolean=false
   showLoginForm:boolean=false
   isLogged:boolean =false
   showProductForm:boolean=false
+  cartItems: number[] = [];
+  logedUser:any;
  
 
 
@@ -31,12 +35,29 @@ export class HeaderComponent implements OnInit{
     })
 
     this.authService.isLoggedEvent.subscribe(value=>{
-      this.isLogged=true
+      this.isLogged=true;
+
+      const user =localStorage.getItem("logedUser");
+
+      
+
+      if(user){
+      
+        this.logedUser=JSON.parse(user)
+        console.log("user from local storage",this.logedUser)
+      }
+      
     })
 
     this.authService.showProductFormEvent.subscribe(value=>{
       this.showProductForm=true
     })
+
+   this.authService.showProductFormEvent.subscribe(value=>{
+    this.showProductForm=value
+   })
+
+   this.cartItems = this.cartService.getCartItems();
 
   }
  
@@ -51,7 +72,8 @@ export class HeaderComponent implements OnInit{
 
 
   logout(){
-this.isLogged=false
+    this.isLogged=false
+    localStorage.removeItem("logedUser");
   }
 
 

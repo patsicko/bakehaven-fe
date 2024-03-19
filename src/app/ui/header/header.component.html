@@ -15,6 +15,11 @@
     <ul class="flex flex-col md:flex-row items-center justify-between gap-8 ">
         <li *ngIf="!isLogged"><button (click)="showSignup(true)">Signup</button></li>
         <li *ngIf="!isLogged"><button (click)="showLogin(true)">Login</button></li>
+        <div>
+            <mat-icon>shopping_cart</mat-icon>
+            {{cartItems.length}}
+        </div>
+        <li *ngIf="isLogged && logedUser">Welcome {{logedUser.firstName[0]}}. {{logedUser.lastName}}</li>
         <li *ngIf="isLogged"><button (click)="logout()">Logout</button></li>
     </ul>
  

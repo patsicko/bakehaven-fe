@@ -11,26 +11,62 @@
         </div>
 
 
-        <div class="text-3xl font-bold m-8">
+        <div class="text-3xl font-bold m-8" >
             Today Best Deals for You!
+         
+            
+           
         </div>
 
+       
+       
    
 
-        <div *ngIf="singleProduct" class="w-full z-50 flex   justify-center items-center gap-6 mx-8 px-8 ">
-            <div class="w-3/4 bg-gray-100 p-2  flex justify-center items-center gap-4 ">
-                <div class="w-1/2 h-auto">
-                    <img src="../../../assets/prodcake.png" alt="">
+        <div *ngIf="singleProduct" class="w-full z-50 flex flex-col  justify-center items-center gap-6 mx-8 px-8 ">
+            <div class="h-1/2 w-1/2 bg-blue-300 py-8 rounded-2xl shadow-xl"*ngIf="showPaymentCard" >
+                <div class="flex items-center justify-center w-full">
+                    <img src="../../../assets/visacard.png" style="height: 100px;" alt="" class="rounded-lg">
+
+                </div>
+                <div>
+
+                 <div class="text-lg flex flex-col justify-start items-start py-6 px-4">
+                    <div class=" w-1/2 pay">
+                     <div class="text-2xl underline py-2">You are going to pay</div>
+                     <div class="">
+                        <span class="font-bold">Product:</span> {{single.name}}
+                     </div>
+                     <div>
+                         <span class="font-bold">Quantity:</span>{{quantity}}
+                     </div>
+         
+                     <div>
+                         <span class="font-bold">Price:</span>{{quantity*single.price}}
+                     </div>
+                    </div>
+                  </div>
+     
+                 <app-payment ></app-payment>
+                </div>
+
+                
+               </div>
+
+
+            <div  class="w-3/4 bg-gray-100 p-2  flex justify-center items-center gap-4 " *ngIf="single">
+                <div class="w-1/2 h-auto flex justify-center items-center">
+                    <img src="{{single.imageUrl}}" alt="">
                 </div>
 
                 <div class="bg-gray w-1/2">
-                    <div class="font-bold text-3xl">
-                    Cake
+                    <div class="font-bold text-2xl">
+                    {{single.name}}
+                    </div>
+                    <div class="font-bold text-2xl">
+                     Price:   {{single.price}} Rwf
                     </div>
                     <div class="text-2xl font-medium pt-4 w-1/2">
-                    The best product made with safe sweet products, 
-                        it is flexible easy to carry and have low price, 
-                        buy it from my shop,quick delivery is guaranteed.
+                   {{single.description}}
                     </div>
                     <div class="mt-4 text-3xl">
                         ⭐️⭐️⭐️⭐️⭐️
@@ -43,13 +79,14 @@
                     </div>
 
                     <div class="mb-4 py-4 flex gap-6">
-                        <button class="border border-3 border-black rounded-2xl px-12 py-2 bg-green-950 text-white">
+                        <button class="border border-3 border-black rounded-2xl px-16 py-2 bg-green-950 text-white" (click)="showPayment()">
+                            By now
+                        </button>
+                        <button class="border border-3 border-black rounded-2xl px-12 py-2  "(click)="addToCart(single.id)">
                             Add to cart
                         </button>
 
-                        <button class="border border-3 border-black rounded-2xl px-16 py-2">
-                            By now
-                        </button>
+                       
             
                     </div>
                     
@@ -101,11 +138,11 @@
 
     <div class="flex flex-wrap justify-center">
         <div *ngFor="let product of products" class="h-auto w-96 flex flex-col justify-between items-center bg-white rounded-lg shadow-lg overflow-hidden m-4">
-          <div class="w-full bg-gray-100 pt-2" (click)="showSingle()">
-            <img class="w-full h-64 object-cover" [src]="product.image" alt="{{ product.title }}">
+          <div class="w-full bg-gray-100 pt-2" (click)="showSingle(product.id)">
+            <img class="w-full h-64 object-cover" [src]="product.imageUrl" alt="{{ product.name }}">
           </div>
           <div class="flex justify-between items-center px-4 py-2 bg-gray-100 gap-20 mt-4">
-            <div class="text-lg font-semibold text-gray-800">{{ product.title }}</div>
+            <div class="text-lg font-semibold text-gray-800">{{ product.name }}</div>
             <div class="text-lg font-semibold text-gray-800">{{ product.price }}</div>
           </div>
           <div>
@@ -115,7 +152,7 @@
             {{ product.rating }}
           </div>
           <div class="mb-4 py-4">
-            <button class="border border-3 border-black rounded-2xl px-12 py-2">
+            <button class="border border-3 border-black rounded-2xl px-12 py-2" (click)="addToCart(product.id)"  >
               Add to cart
             </button>
           </div>

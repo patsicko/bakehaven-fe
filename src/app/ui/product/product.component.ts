@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 
 
 @Component({
@@ -6,15 +7,64 @@ import { Component } from '@angular/core';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit{
 
+  constructor(
+    private cartService: CartService
+  ){}
+  ngOnInit(): void {
+    this.cartService.paymentSuccessEvent.subscribe(token=>{
+      console.log("token",token)
+      this.productIds.push(this.single.id)
+      const order={
+        "userId": 1,
+        productIds:this.productIds,
+        "quantity": this.quantity
+      }
+
+      console.log("order",order)
+    })
+  }
 
   quantity: number = 1;
+  productIds: number[] = [];
+
+
+  
+
+  single:{
+    id:number,
+    name:string,
+    category:string,
+    description:string,
+    quantity:number,
+    price:number,
+    rating:any,
+    inStock:boolean,
+    imageUrl:string
+  }
 
   singleProduct:boolean=false
   allProducts:boolean=true
+  showPaymentCard:boolean=false;
 
-  showSingle(){
+
+  showPayment(){
+    this.showPaymentCard=true
+  }
+
+  showSingle(id:number){
+    this.single= {
+      "id": 2,
+      "name": "indazi",
+      "category": "cakes",
+      "description": "",
+      "quantity": 5,
+      "price": 500,
+      "rating": null,
+      "inStock": false,
+      "imageUrl": "../../../assets/download (5).jpeg"
+    }
     this.singleProduct=true
     this.allProducts=false
   }
@@ -34,7 +84,80 @@ export class ProductComponent {
   }
 
 
-  products = [
+  addToCart(productId: number) {
+    this.cartService.addToCart(productId);
+  }
+  products =[
+    {
+      "id": 2,
+      "name": "indazi",
+      "category": "cakes",
+      "description": "",
+      "quantity": 5,
+      "price": 500,
+      "rating": null,
+      "inStock": false,
+      "imageUrl": "../../../assets/download (5).jpeg"
+    },
+    {
+      "id": 3,
+      "name": "sambusa",
+      "category": "cakes",
+      "description": "",
+      "quantity": 10,
+      "price": 500,
+      "rating": null,
+      "inStock": false,
+      "imageUrl": "../../../assets/download (3).jpeg"
+    },
+    {
+      "id": 4,
+      "name": "cake",
+      "category": "cakes",
+      "description": "",
+      "quantity": 5,
+      "price": 500,
+      "rating": null,
+      "inStock": false,
+      "imageUrl": "../../../assets/download (1).jpeg"
+    },
+    {
+      "id": 5,
+      "name": "small cake",
+      "category": "cakes",
+      "description": "sweet product",
+      "quantity": 5,
+      "price": 500,
+      "rating": null,
+      "inStock": false,
+      "imageUrl": "../../../assets/download (1).jpeg"
+    },
+    {
+      "id": 6,
+      "name": "small cake",
+      "category": "cakes",
+      "description": "sweet product",
+      "quantity": 5,
+      "price": 500,
+      "rating": null,
+      "inStock": false,
+      "imageUrl": "../../../assets/weeding.png"
+    },
+    {
+      "id": 7,
+      "name": "small cake",
+      "category": "cakes",
+      "description": "sweet product",
+      "quantity": 5,
+      "price": 500,
+      "rating": null,
+      "inStock": false,
+      "imageUrl": "../../../assets/weeding.png"
+    }
+  ]
+
+
+  product = [
     {
       image: '../../../assets/weeding.png',
       title: 'Wedding',

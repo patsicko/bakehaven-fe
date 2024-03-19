@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product-form',
@@ -13,7 +14,10 @@ export class ProductFormComponent {
   isSubmitted: boolean = false;
   imageUrl:any;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService:AuthService,
+     private http: HttpClient) {
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       category: ['', [Validators.required]],
@@ -55,6 +59,6 @@ export class ProductFormComponent {
 
 
   closeProductForm(value:boolean){
-
+   this.authService.closeProductFormClicked(value)
   }
 }

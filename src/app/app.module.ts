@@ -24,6 +24,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
+import { PaymentComponent } from './ui/payment/payment.component'
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     IncomeChartComponent,
     ProductFormComponent,
+    PaymentComponent,
     
    
   ],
@@ -54,7 +60,8 @@ import { HttpClientModule } from '@angular/common/http';
       preventDuplicates: true,
     }),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
