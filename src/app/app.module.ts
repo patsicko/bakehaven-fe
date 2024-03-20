@@ -55,7 +55,7 @@ import { PaymentComponent } from './ui/payment/payment.component'
     HttpClientModule,
     MatIconModule,
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 4000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),

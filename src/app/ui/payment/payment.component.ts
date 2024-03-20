@@ -1,5 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { loadStripe, Stripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -10,7 +12,9 @@ import { CartService } from 'src/app/services/cart.service';
 export class PaymentComponent implements OnInit {
 
   constructor(
-    private cartService:CartService
+    private cartService:CartService,
+    private authService:AuthService,
+    private toastr:ToastrService
   ){}
 
 
@@ -18,8 +22,9 @@ export class PaymentComponent implements OnInit {
   card: StripeCardElement;
   displayError:any
   errorElement:any;
- 
+ loggedUser:any
   async ngOnInit() {
+    this.loggedUser=this.authService.getLoggedUser()
     const stripe = await loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 
     if (stripe) {
@@ -53,6 +58,8 @@ export class PaymentComponent implements OnInit {
   }
 
   async handleSubmit() {
+
+  if(this.loggedUser){
     const { token, error } = await this.stripe.createToken(this.card);
   
     if (error) {
@@ -62,6 +69,11 @@ export class PaymentComponent implements OnInit {
       // Send the token to your server
       this.stripeTokenHandler(token);
     }
+
+  }
+  else{
+   this.toastr.warning("Login before payment")
+  }
   }
   
   stripeTokenHandler(token:any) {

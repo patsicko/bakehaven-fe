@@ -19,8 +19,8 @@
             <mat-icon>shopping_cart</mat-icon>
             {{cartItems.length}}
         </div>
-        <li *ngIf="isLogged && logedUser">Welcome {{logedUser.firstName[0]}}. {{logedUser.lastName}}</li>
-        <li *ngIf="isLogged"><button (click)="logout()">Logout</button></li>
+        <li *ngIf="isLogged&&loggedUser ">Welcome {{loggedUser.firstName[0]}}. {{loggedUser.lastName}}</li>
+        <li *ngIf="isLogged  "><button (click)="logout()">Logout</button></li>
     </ul>
  
 </div>

@@ -17,6 +17,10 @@ appUrl='http://localhost:3001/api'
 
 
 
+
+ 
+
+
   showSignupEvent:EventEmitter<boolean>=new EventEmitter<boolean>()
 
   showLoginFormEvent:EventEmitter<boolean> = new EventEmitter<boolean>()
@@ -70,4 +74,30 @@ login(loginDTO:LoginDTO):Observable<any>{
   )
 }
 
+
+
+getLoggedUser(){
+  const user =localStorage.getItem("logedUser");
+      if(user){
+      
+        const loggedUser=JSON.parse(user)
+       return loggedUser
+      }
+
+      return null
 }
+
+
+
+getUsers():Observable<any>{
+  return this.http.get(`${this.appUrl}/user/all`,{headers:this.headers}).pipe(
+    tap(result=>{
+      return result
+    })
+  )
+}
+
+
+}
+
+

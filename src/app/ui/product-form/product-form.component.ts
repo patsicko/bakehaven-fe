@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-form',
@@ -13,11 +15,17 @@ export class ProductFormComponent {
   productForm: FormGroup;
   isSubmitted: boolean = false;
   imageUrl:any;
+  
+categories: string[] = ['cakes', 'cupcakes', 'weddings', 'snacks', 'ibiraha', 'beignets', 'amandazi', 'sambusa'];
+
 
   constructor(
     private formBuilder: FormBuilder,
     private authService:AuthService,
-     private http: HttpClient) {
+     private http: HttpClient,
+     private productSrvice:ProductService,
+     private toastr:ToastrService
+     ) {
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       category: ['', [Validators.required]],
@@ -52,7 +60,20 @@ export class ProductFormComponent {
       const formData=this.productForm.value;
       formData.imageUrl=this.imageUrl;
 
-      console.log("formData",formData)
+      this.productSrvice.createProduct(formData).subscribe({
+        next:(result)=>{
+          console.log("product created successfully",result);
+          this.authService.closeProductFormClicked(false);
+          this.toastr.success("product created successfully");
+        return result
+        },
+        error:(error)=>{
+          this.toastr.error("failed to create product")
+          throw error.message
+        }
+      })
+
+     
     }
   }
 

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginDTO } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 
@@ -17,7 +20,10 @@ isLoginSubmitted:boolean=false
 
 constructor(
   private formBuilder:FormBuilder,
-  private authService:AuthService
+  private authService:AuthService,
+  private router:Router,
+  private toastr: ToastrService
+  
 ){
   this.loginForm=this.formBuilder.group({
     email:['',[Validators.required,Validators.email]],
@@ -38,10 +44,24 @@ constructor(
 
       this.authService.login(loginDTO).subscribe({
         next:(result=>{
+         
           console.log("loginResult",result.user);
-          localStorage.setItem("logedUser",JSON.stringify(result.user))
+          localStorage.setItem("logedUser",JSON.stringify(result.user));
+          if(result.user.role==='admin'){
+            console.log("this is admin",result.user);
+            this.authService.authAction(true)
+            this.router.navigate(['/dashboard'])
+          }else{
+            this.router.navigate(['/home'])
+          }
+
+          this.authService.authAction(true)
+          this.toastr.success("login successfull")
+          
         }),
         error:(error)=>{
+          this.authService.authAction(false)
+          this.toastr.error("Invalid credentials")
           throw error.message
         }
       })

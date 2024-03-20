@@ -27,9 +27,14 @@
 
         <div class="mb-3 w-full text-2xl font-bold">
             <label for="category" class="text-black">Category</label>
-            <input type="text" name="category" id="category" placeholder="category" class="w-full h-16 rounded-xl px-4 py-2 outline-none" formControlName="category">
+            <select name="category" id="category" class="w-full h-16 rounded-xl  py-2 outline-none" formControlName="category">
+                <option value="">Select Category</option>
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+              
+            </select>
             <span class="text-red-700" *ngIf="productForm.get('category')?.hasError('required') && (productForm.get('category')?.touched || isSubmitted)">Category is required</span>
         </div>
+        
       </div>
 
       <div class="flex w-full gap-4 text-2xl mb-6 ">

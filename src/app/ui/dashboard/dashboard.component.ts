@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +13,11 @@ export class DashboardComponent implements OnInit {
    this.getOrders()
   }
 
-  constructor(private authService:AuthService){}
+  constructor(
+    private authService:AuthService,
+    private productService:ProductService,
+    private toastr:ToastrService
+    ){}
 
   orders:any
   users:any
@@ -27,48 +33,39 @@ export class DashboardComponent implements OnInit {
 
   getUsers(){
     this.orders=null
-    this.products=null
-   this.users=[
-      {
-        "id": 1,
-        "firstName": "Manibaho",
-        "lastName": "Patrick",
-        "email": "patsicko@gmail.com",
-        "password": "$2b$10$mX8ftMWungBLc4bYmu/86es64fKR9bv1/5huHQBTh4XMCrgWfYkJa",
-        "role": "user",
-        "isActive": true
+    this.products=null;
+    this.authService.getUsers().subscribe({
+      next:(result)=>{
+        if(result){
+          this.users=result
+        }
+      },
+      error:(error)=>{
+        this.toastr.error("Unable to get users");
+        return error.message
       }
-    ]
+    })
+
 
   }
 
   getProducts(){
     this.users=null
     this.orders=null
-
-
-    this.products=[
-      {
-        "id": 2,
-        "productName": "small cake",
-        "category": "cakes",
-        "quantity": 5,
-        "price": 500,
-        "rating": null,
-        "inStock": false,
-        "imageUrl": "cake image"
-      },
-      {
-        "id": 3,
-        "productName": "indazi",
-        "category": "cakes",
-        "quantity": 10,
-        "price": 500,
-        "rating": null,
-        "inStock": false,
-        "imageUrl": "cake image"
+  this.productService.getProducts().subscribe({
+    next:(result)=>{
+      if(result){
+        console.log("products",result)
+        this.products=result
       }
-    ]
+    },
+    error:(error)=>{
+      this.toastr.error("Unable to get products");
+      return error.message
+    }
+  })
+
+    
 
   }
 
@@ -78,7 +75,19 @@ export class DashboardComponent implements OnInit {
   getOrders(){
 
     this.users=null
-    this.products=null
+    this.products=null;
+
+    this.productService.getOrders().subscribe({
+      next:(result)=>{
+        if(result){
+          this.orders=result
+        }
+      },
+      error:(error)=>{
+        this.toastr.error("Unable to get orders");
+        return error.message
+      }
+    })
 
   this.orders = [
     {

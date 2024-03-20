@@ -124,11 +124,11 @@
         <div class="flex justify-around items-center p-4 my-32 mx-8">
             <ul class="flex flex-col md:flex-row justify-around items-center  gap-4 w-full  md:w-1/2  p-4">
                 <li><button class="bg-green-800 px-10 py-1 text-2xl text-white rounded-md"  (click)="showAllProducts()">All</button></li>
-                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Cakes</button></li>
-                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Cupcakes</button></li>
-                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Weeding </button></li>
-                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Snacks</button></li>
-                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md">Ibiraha</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md" (click)="getProductsByCategory('cakes')">Cakes</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md" (click)="getProductsByCategory('cupcakes')">Cupcakes</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md" (click)="getProductsByCategory('weddings')">Weedings </button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md" (click)="getProductsByCategory('snacks')">Snacks</button></li>
+                <li><button class="bg-gray-400 px-10 py-1 text-2xl text-white rounded-md" (click)="getProductsByCategory('ibiraha')">Ibiraha</button></li>
             </ul>
         </div>
 
@@ -136,6 +136,7 @@
 
    <div *ngIf="allProducts" class="flex flex-col md:flex-row gap-4 justify-around items-center p-4 my-32" >
 
+    
     <div class="flex flex-wrap justify-center">
         <div *ngFor="let product of products" class="h-auto w-96 flex flex-col justify-between items-center bg-white rounded-lg shadow-lg overflow-hidden m-4">
           <div class="w-full bg-gray-100 pt-2" (click)="showSingle(product.id)">
@@ -158,7 +159,38 @@
           </div>
         </div>
       </div>
-      
+
+   
+   </div>
+
+
+
+
+   <div *ngIf="categories" class="flex flex-col md:flex-row gap-4 justify-around items-center p-4 my-32" >
+
+    
+    <div class="flex flex-wrap justify-center">
+        <div *ngFor="let product of categories" class="h-auto w-96 flex flex-col justify-between items-center bg-white rounded-lg shadow-lg overflow-hidden m-4">
+          <div class="w-full bg-gray-100 pt-2" (click)="showSingle(product.id)">
+            <img class="w-full h-64 object-cover" [src]="product.imageUrl" alt="{{ product.name }}">
+          </div>
+          <div class="flex justify-between items-center px-4 py-2 bg-gray-100 gap-20 mt-4">
+            <div class="text-lg font-semibold text-gray-800">{{ product.name }}</div>
+            <div class="text-lg font-semibold text-gray-800">{{ product.price }}</div>
+          </div>
+          <div>
+            {{ product.description }}
+          </div>
+          <div>
+            {{ product.rating }}
+          </div>
+          <div class="mb-4 py-4">
+            <button class="border border-3 border-black rounded-2xl px-12 py-2" (click)="addToCart(product.id)"  >
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
 
    
    </div>

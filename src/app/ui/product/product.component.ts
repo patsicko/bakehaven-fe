@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
 
 
 @Component({
@@ -10,27 +13,47 @@ import { CartService } from 'src/app/services/cart.service';
 export class ProductComponent implements OnInit{
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private productService:ProductService,
+    private authService:AuthService,
+    private toastr:ToastrService
   ){}
+loggedUser:any;
+
+
   ngOnInit(): void {
+
+    
+    this.getProducts();
+
+
     this.cartService.paymentSuccessEvent.subscribe(token=>{
       console.log("token",token)
-      this.productIds.push(this.single.id)
+      this.productIds.push(this.single?.id);
+      this.loggedUser=this.authService.getLoggedUser()
+    
       const order={
-        "userId": 1,
+        userId: this.loggedUser.id,
         productIds:this.productIds,
-        "quantity": this.quantity
+        quantity: this.quantity
       }
-
-      console.log("order",order)
+      
+      this.productService.createOrder(order).subscribe({
+        next:(result)=>{
+          console.log("created order",result);
+          this.toastr.success("Your order is successfull, we will contact you for delivery soon")
+        },
+      error:(error)=>{
+        this.toastr.error("Unable to order the product");
+        throw error.message
+      }
+      })
+      
     })
   }
 
   quantity: number = 1;
   productIds: number[] = [];
-
-
-  
 
   single:{
     id:number,
@@ -45,7 +68,8 @@ export class ProductComponent implements OnInit{
   }
 
   singleProduct:boolean=false
-  allProducts:boolean=true
+  allProducts:boolean=true;
+  categories:any;
   showPaymentCard:boolean=false;
 
 
@@ -54,23 +78,20 @@ export class ProductComponent implements OnInit{
   }
 
   showSingle(id:number){
-    this.single= {
-      "id": 2,
-      "name": "indazi",
-      "category": "cakes",
-      "description": "",
-      "quantity": 5,
-      "price": 500,
-      "rating": null,
-      "inStock": false,
-      "imageUrl": "../../../assets/download (5).jpeg"
+   for(let i=0; i<this.products.length;i++){
+    if(this.products[i].id===id){
+      this.single=this.products[i]
     }
+   }
+
+    
     this.singleProduct=true
     this.allProducts=false
   }
 
   showAllProducts(){
-    this.allProducts=true
+    this.allProducts=true,
+    this.getProducts()
   }
 
   increment() {
@@ -87,6 +108,13 @@ export class ProductComponent implements OnInit{
   addToCart(productId: number) {
     this.cartService.addToCart(productId);
   }
+
+  getProductsByCategory(category: string): any[] {
+    this.allProducts=false;
+   
+    return this.categories= this.products.filter(product => product.category === category);
+  }
+  
   products =[
     {
       "id": 2,
@@ -157,113 +185,16 @@ export class ProductComponent implements OnInit{
   ]
 
 
-  product = [
-    {
-      image: '../../../assets/weeding.png',
-      title: 'Wedding',
-      price: '5400 Rwf',
-      description: 'Custom-designed wedding cakes tailored to your style and taste.',
-      rating: '⭐️⭐️⭐️⭐️⭐️'
-    },
-    {
-      image: '../../../assets/cakewed.jpg',
-      title: 'Wedding',
-      price: '5400 Rwf',
-      description: 'Custom-designed wedding cakes tailored to your style and taste.',
-      rating: '⭐️⭐️⭐️⭐️⭐️'
-    },
-    
-    {
-      image: '../../../assets/download (1).jpeg',
-      title: 'Product 1',
-      price: 'Price 1',
-      description: 'Description 1',
-      rating: 'Rating 1'
-    },
-    {
-      image: '../../../assets/download (2).jpeg',
-      title: 'Product 2',
-      price: 'Price 2',
-      description: 'Description 2',
-      rating: 'Rating 2'
-    },
-    {
-      image: '../../../assets/download (3).jpeg',
-      title: 'Product 3',
-      price: 'Price 3',
-      description: 'Description 3',
-      rating: 'Rating 3'
-    },
-    {
-      image: '../../../assets/download (4).jpeg',
-      title: 'Product 4',
-      price: 'Price 4',
-      description: 'Description 4',
-      rating: 'Rating 4'
-    },
-    {
-      image: '../../../assets/download (5).jpeg',
-      title: 'Product 5',
-      price: 'Price 5',
-      description: 'Description 5',
-      rating: 'Rating 5'
-    },
-    {
-      image: '../../../assets/download (6).jpeg',
-      title: 'Product 6',
-      price: 'Price 6',
-      description: 'Description 6',
-      rating: 'Rating 6'
-    },
-    {
-      image: '../../../assets/download.jpeg',
-      title: 'Product 7',
-      price: 'Price 7',
-      description: 'Description 7',
-      rating: 'Rating 7'
-    },
-    {
-      image: '../../../assets/images (1).jpeg',
-      title: 'Product 8',
-      price: 'Price 8',
-      description: 'Description 8',
-      rating: 'Rating 8'
-    },
-    {
-      image: '../../../assets/images (2).jpeg',
-      title: 'Product 9',
-      price: 'Price 9',
-      description: 'Description 9',
-      rating: 'Rating 9'
-    },
-    {
-      image: '../../../assets/images (3).jpeg',
-      title: 'Product 10',
-      price: 'Price 10',
-      description: 'Description 10',
-      rating: 'Rating 10'
-    },
-    {
-      image: '../../../assets/images (4).jpeg',
-      title: 'Product 11',
-      price: 'Price 11',
-      description: 'Description 11',
-      rating: 'Rating 11'
-    },
-    {
-      image: '../../../assets/images (5).jpeg',
-      title: 'Product 12',
-      price: 'Price 12',
-      description: 'Description 12',
-      rating: 'Rating 12'
-    },
-    {
-      image: '../../../assets/images (6).jpeg',
-      title: 'Product 13',
-      price: 'Price 13',
-      description: 'Description 13',
-      rating: 'Rating 13'
+  getProducts(){
+  this.productService.getProducts().subscribe({
+    next:(result)=>{
+      this.products=result
+    },error:(error)=>{
+      throw error.message
     }
-  ];
+  })
+  }
+
+
 
 }
