@@ -12,9 +12,9 @@
 
  <div class="flex gap-4 text-2xl"  >
     <div class="mb-3 w-full">
-        <label for="name">Name</label>  <br>
-        <input type="text" name="name" id="name" placeholder="name" formControlName="name" class="w-full h-12 p-5 rounded-lg outline-none" >
-        <span class="text-red-700" *ngIf="contactUs.get('name')?.hasError('required') && (contactUs.get('name')?.touched || isSubmitted)">Name is required</span>
+        <label for="names">Name</label>  <br>
+        <input type="text" name="names" id="names" placeholder="names" formControlName="names" class="w-full h-12 p-5 rounded-lg outline-none" >
+        <span class="text-red-700" *ngIf="contactUs.get('names')?.hasError('required') && (contactUs.get('names')?.touched || isSubmitted)">Name is required</span>
     </div>
     
     <div class="mb-3 w-full">

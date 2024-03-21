@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit{
   showProductForm:boolean=false
   cartItems: number[] = [];
   loggedUser:any;
+  notifications:number;
+  messages:any
  
 
 
@@ -32,13 +34,17 @@ export class HeaderComponent implements OnInit{
 
     if(loggedUser){
       this.loggedUser=loggedUser
-      this.isLogged=true
+      this.isLogged=true;
+      if(loggedUser.role==='admin'){
+        this.getMessages()
+      }
     }else{
       this.loggedUser=null
       this.isLogged=false
     }
-
-
+   
+   
+  
     this.authService.showSignupEvent.subscribe(value=>{
     this.showSignupForm=value
     })
@@ -52,10 +58,6 @@ export class HeaderComponent implements OnInit{
       if (!this.isLogged) {
         this.router.navigate(['/home']); 
     }
-
-   
-    
-
       
     })
 
@@ -71,6 +73,23 @@ export class HeaderComponent implements OnInit{
 
   }
  
+
+
+  getMessages(){
+    this.authService.getMessages().subscribe({
+      next:(result)=>{
+      this.messages=result;
+      this.notifications=result.length
+      },
+      error:(error)=>{
+        this.toastr.error("unable to get notifications");
+        throw error.message
+      }
+    })
+  }
+
+
+
   showSignup(value:boolean){
     this.showSignupForm=value
   }
@@ -84,7 +103,13 @@ export class HeaderComponent implements OnInit{
   logout(){
     this.isLogged=false
     localStorage.removeItem("logedUser");
-    this.router.navigate(['/home'])
+
+   
+    
+    this.router.navigate(['/home']).then(() => {
+      // Reload the browser to ensure a successful logout
+      window.location.reload();
+    });
     this.toastr.warning('You logged out');
 
     history.pushState(null, window.location.href);

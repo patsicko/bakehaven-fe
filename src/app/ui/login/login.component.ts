@@ -50,9 +50,15 @@ constructor(
           if(result.user.role==='admin'){
             console.log("this is admin",result.user);
             this.authService.authAction(true)
-            this.router.navigate(['/dashboard'])
+            this.router.navigate(['/dashboard']).then(() => {
+              // Reload the browser to ensure a successful logout
+              window.location.reload();
+            });
           }else{
-            this.router.navigate(['/home'])
+            this.router.navigate(['/home']).then(() => {
+              // Reload the browser to ensure a successful logout
+              window.location.reload();
+            });
           }
 
           this.authService.authAction(true)

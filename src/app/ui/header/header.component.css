@@ -1,0 +1,8 @@
+ul li a:hover {
+    color: #202abe; 
+}
+
+
+ul li a.router-link-active {
+    color: rgb(50, 172, 145); 
+}

@@ -152,7 +152,10 @@
           <div>
             {{ product.rating }}
           </div>
-          <div class="mb-4 py-4">
+          <div class="mb-4 py-4 flex gap-2" >
+            <button class="border border-3 border-black rounded-2xl px-12 py-2 bg-green-950 text-white" (click)="showSingle(product.id)"  >
+                By now
+              </button>
             <button class="border border-3 border-black rounded-2xl px-12 py-2" (click)="addToCart(product.id)"  >
               Add to cart
             </button>
@@ -184,7 +187,10 @@
           <div>
             {{ product.rating }}
           </div>
-          <div class="mb-4 py-4">
+          <div class="mb-4 py-4 flex gap-2" >
+            <button class="border border-3 border-black rounded-2xl px-12 py-2 bg-green-950 text-white" (click)="showSingle(product.id)"  >
+                By now
+              </button>
             <button class="border border-3 border-black rounded-2xl px-12 py-2" (click)="addToCart(product.id)"  >
               Add to cart
             </button>

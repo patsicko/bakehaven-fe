@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { CreateUserDTO, LoginDTO } from '../models/user.models';
+import { CreateUserDTO, LoginDTO, MessageDTO } from '../models/user.models';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -13,8 +13,8 @@ export class AuthService {
   headers=new HttpHeaders({
     'Content-Type':'application/json'
   });
-appUrl='http://localhost:3001/api'
-
+// appUrl='http://localhost:3001/api'
+appUrl='https://bakehaven-nest-be.onrender.com/api'
 
 
 
@@ -97,6 +97,24 @@ getUsers():Observable<any>{
   )
 }
 
+
+postMessage(messageDTO:MessageDTO):Observable<any>{
+  return this.http.post(`${this.appUrl}/message`,messageDTO,{headers:this.headers}).pipe(
+    tap(response=>{
+      return response;
+    })
+    
+  )
+}
+
+
+getMessages():Observable<any>{
+  return this.http.get(`${this.appUrl}/message`,{headers:this.headers}).pipe(
+    tap(response=>{
+      return response
+    })
+  )
+}
 
 }
 

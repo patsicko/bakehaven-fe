@@ -13,8 +13,9 @@ export class ProductService {
   headers=new HttpHeaders({
     'Content-Type':'application/json'
   });
-appUrl='http://localhost:3001/api'
+// appUrl='http://localhost:3001/api'
 
+appUrl='https://bakehaven-nest-be.onrender.com/api'
 
 
 

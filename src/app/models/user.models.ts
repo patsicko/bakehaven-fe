@@ -9,3 +9,9 @@ export interface LoginDTO{
     email:string,
     password:string
 }
+
+export interface MessageDTO{
+    names:string,
+    email:string,
+    message:string
+}
