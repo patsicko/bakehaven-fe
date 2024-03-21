@@ -21,7 +21,7 @@
         </div>
         <li *ngIf="isLogged&&loggedUser ">Welcome {{loggedUser.firstName[0]}}. {{loggedUser.lastName}}</li>
         <li *ngIf="messages"><mat-icon>notifications</mat-icon> <span class="text-red-600 text-xl font-bold " *ngIf="notifications">{{notifications}}</span></li>
-        <li *ngIf="isLogged  "><button (click)="logout()">Logout</button></li>
+        <li *ngIf="isLogged&&loggedUser "><button (click)="logout()">Logout</button></li>
     </ul>
  
 </div>

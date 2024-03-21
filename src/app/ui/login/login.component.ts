@@ -17,6 +17,8 @@ export class LoginComponent {
 
 loginForm:FormGroup
 isLoginSubmitted:boolean=false
+isLoading: boolean = false;
+loggedUser:any=null
 
 constructor(
   private formBuilder:FormBuilder,
@@ -36,46 +38,57 @@ constructor(
      this.authService.closeLoginButtonClicked(value)
   }
 
-  submitLogin(){
+ async submitLogin(){
     this.isLoginSubmitted=true
     if(this.loginForm.valid){
+      this.isLoading = true;
       
       const loginDTO:LoginDTO=this.loginForm.value;
 
-      this.authService.login(loginDTO).subscribe({
+      await this.authService.login(loginDTO).subscribe({
         next:(result=>{
          
           console.log("loginResult",result.user);
+         if(result){
+           this.loggedUser=result.user
           
-          localStorage.setItem("logedUser",JSON.stringify(result.user));
           if(result.user.role==='admin'){
             console.log("this is admin",result.user);
             this.authService.authAction(true)
             this.router.navigate(['/dashboard']).then(() => {
-              // Reload the browser to ensure a successful logout
+              
               window.location.reload();
             });
           }else{
             this.router.navigate(['/home']).then(() => {
-              // Reload the browser to ensure a successful logout
+             
               window.location.reload();
             });
           }
 
           this.authService.authAction(true)
           this.toastr.success("login successfull")
+         }
           
         }),
         error:(error)=>{
           this.authService.authAction(false)
           this.toastr.error("Invalid credentials")
           throw error.message
+        },
+
+        complete: () => {
+          localStorage.setItem("logedUser",JSON.stringify(this.loggedUser));
+          this.authService.loginSuccess(this.loggedUser)
+          this.isLoading = false; 
+          this.authService.closeLoginButtonClicked(false)
+          this.authService.authAction(true)
         }
+        
       })
 
       
-      this.authService.closeLoginButtonClicked(false)
-      this.authService.authAction(true)
+     
 
       
     }

@@ -28,6 +28,8 @@ appUrl='https://bakehaven-nest-be.onrender.com/api'
   isLoggedEvent:EventEmitter<boolean> = new EventEmitter<boolean>()
   showProductFormEvent:EventEmitter<boolean> = new EventEmitter<boolean>()
 
+  loginSuccessEvent:EventEmitter<any>=new EventEmitter<any>()
+
 
   singupButtonClicked(value:boolean){
     this.showSignupEvent.emit(value)
@@ -116,6 +118,9 @@ getMessages():Observable<any>{
   )
 }
 
+loginSuccess(user:any){
+this.loginSuccessEvent.emit(user)
+}
 }
 
 

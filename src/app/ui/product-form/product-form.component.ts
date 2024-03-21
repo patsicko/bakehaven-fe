@@ -15,6 +15,7 @@ export class ProductFormComponent {
   productForm: FormGroup;
   isSubmitted: boolean = false;
   imageUrl:any;
+  isLoading:boolean=false
   
 categories: string[] = ['cakes', 'cupcakes', 'weddings', 'snacks', 'ibiraha', 'beignets', 'amandazi', 'sambusa'];
 
@@ -56,6 +57,7 @@ categories: string[] = ['cakes', 'cupcakes', 'weddings', 'snacks', 'ibiraha', 'b
     this.isSubmitted = true;
   
     if (this.productForm.valid && this.imageUrl) {
+      this.isLoading=true
       
       const formData=this.productForm.value;
       formData.imageUrl=this.imageUrl;
@@ -70,6 +72,9 @@ categories: string[] = ['cakes', 'cupcakes', 'weddings', 'snacks', 'ibiraha', 'b
         error:(error)=>{
           this.toastr.error("failed to create product")
           throw error.message
+        },
+        complete:()=>{
+          this.isLoading=false
         }
       })
 

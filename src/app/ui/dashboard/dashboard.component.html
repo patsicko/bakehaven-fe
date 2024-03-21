@@ -8,7 +8,7 @@
    
              <hr class=" mt-10">
    
-             <div class="mt-10   p-3 rounded hover:bg-sky hover:text-white text-[#a9b4fa] font-bold cursor-pointer transition duration-900 ease-in-out"> <mat-icon>home</mat-icon> Home</div>
+             <div class="mt-10   p-3 rounded hover:bg-sky hover:text-white text-[#a9b4fa] font-bold cursor-pointer transition duration-900 ease-in-out" (click)="backHome()"> <mat-icon>home</mat-icon> Home</div>
              <div class="mt-10   p-3 rounded hover:bg-sky hover:text-white text-[#a9b4fa] font-bold cursor-pointer" (click)="getOrders()"> <mat-icon>shopping_cart</mat-icon > Orders</div>
              <div class="mt-10   p-3 rounded hover:bg-sky hover:text-white text-[#a9b4fa] font-bold cursor-pointer"   (click)="getProducts()"> <mat-icon>inventory_2</mat-icon> Products</div>
              <div class="mt-10   p-3 rounded hover:bg-sky hover:text-white text-[#a9b4fa] font-bold cursor-pointer"  (click)="getUsers()"> <mat-icon class="text-2xl">group</mat-icon> Users</div>

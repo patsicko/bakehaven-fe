@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -16,7 +17,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService:AuthService,
     private productService:ProductService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private router:Router
     ){}
 
   orders:any
@@ -128,6 +130,13 @@ this.productService.deleteOrder(id).subscribe({
     throw error.message
   }
 })
+}
+
+backHome(){
+  this.router.navigate(['/home']).then(() => {
+             
+    window.location.reload();
+  });
 }
 }
 

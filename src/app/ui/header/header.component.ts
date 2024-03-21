@@ -31,6 +31,9 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit(): void {
     const loggedUser = this.authService.getLoggedUser();
+    if(!loggedUser){
+      this.router.navigate(['/home']); 
+    }
 
     if(loggedUser){
       this.loggedUser=loggedUser
@@ -107,15 +110,16 @@ export class HeaderComponent implements OnInit{
    
     
     this.router.navigate(['/home']).then(() => {
-      // Reload the browser to ensure a successful logout
+     
+      history.pushState(null, window.location.href);
+      window.onpopstate = function () {
+          history.go(1);
+      };
       window.location.reload();
     });
     this.toastr.warning('You logged out');
 
-    history.pushState(null, window.location.href);
-    window.onpopstate = function () {
-        history.go(1);
-    };
+   
     
     
   }

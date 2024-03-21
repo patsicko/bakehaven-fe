@@ -10,7 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignupComponent {
 
   signupForm:FormGroup
-  isSubmitted:boolean=false
+  isSubmitted:boolean=false;
+  isLoading:boolean=false
  
 
 
@@ -36,16 +37,23 @@ this.authService.closeSignupClicked(value)
   submitSignup(){
     this.isSubmitted=true
     if(this.signupForm.valid){
-     
+     this.isLoading=true;
 
       const createUserDTO=this.signupForm.value
 
       this.authService.createUser(createUserDTO).subscribe({
         next:(response)=>{
           console.log("response from server",response)
+          if(response){
+            
+          }
         },
         error:(error)=>{
          throw error.message
+        },
+
+        complete:()=>{
+          this.isLoading=false
         }
         
       })
