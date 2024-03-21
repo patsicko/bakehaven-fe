@@ -22,6 +22,7 @@ export class PaymentComponent implements OnInit {
   card: StripeCardElement;
   displayError:any
   errorElement:any;
+  isLoading:boolean=false
  loggedUser:any
   async ngOnInit() {
     this.loggedUser=this.authService.getLoggedUser()
@@ -59,7 +60,9 @@ export class PaymentComponent implements OnInit {
 
   async handleSubmit() {
 
+
   if(this.loggedUser){
+    this.isLoading=true
     const { token, error } = await this.stripe.createToken(this.card);
   
     if (error) {
@@ -77,8 +80,11 @@ export class PaymentComponent implements OnInit {
   }
   
   stripeTokenHandler(token:any) {
-    // Send the token to your server for processing
-    this.cartService.paymentAction(token)
-  // console.log(token)
+    
+    this.cartService.paymentAction(token);
+    if(token){
+      this.isLoading=false
+    }
+ 
   }
 }

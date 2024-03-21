@@ -76,4 +76,12 @@ deleteOrder(id:number):Observable<any>{
     })
   )
 }
+
+deleteProduct(id:number):Observable<any>{
+  return this.http.delete(`${this.appUrl}/products/${id}`,{headers:this.headers}).pipe(
+    tap(result=>{
+      return result;
+    })
+  )
+}
 }

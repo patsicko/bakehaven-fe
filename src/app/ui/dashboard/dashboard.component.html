@@ -90,8 +90,8 @@
               <td class="px-6 py-4">{{ ord.user.firstName }} {{ ord.user.lastName }}</td>
               <td class="px-6 py-4">{{ ord.totalPrice }}</td>
               <td class="px-6 py-4">{{ ord.status }}</td>
-              <td><button (click)="approveOrder(ord.id)" *ngIf="ord.status==='pending'">Approve</button></td>
-              <td><button (click)="cancelOrder(ord.id)" *ngIf="ord.status==='pending'">Cancel</button></td>
+              <td><button (click)="approveOrder(ord.id)" *ngIf="ord.status==='pending'" class="bg-blue-600 py-1 px-3 rounded-md text-wite font-bold">Approve</button></td>
+              <td><button (click)="cancelOrder(ord.id)" *ngIf="ord.status==='pending'" class="bg-red-400 py-1 px-3 rounded-md text-white font-bold">Cancel</button></td>
               <td><button (click)="deleteOrder(ord.id)" ><mat-icon class="text-red-600">delete</mat-icon></button></td>
             </tr>
           </tbody>
@@ -152,7 +152,7 @@
         <th scope="col" class="px-6 py-3">Category</th>
         <th scope="col" class="px-6 py-3">Quantity</th>
         <th scope="col" class="px-6 py-3">Price</th>
-        <th scope="col" class="px-6 py-3">In Stock</th>
+        <th scope="col" class="px-6 py-3">Action</th>
       </tr>
     </thead>
     <tbody class="overflow-auto">
@@ -168,7 +168,7 @@
         <td class="px-6 py-4">{{ product.category }}</td>
         <td class="px-6 py-4">{{ product.quantity }}</td>
         <td class="px-6 py-4">{{ product.price }}</td>
-        <td class="px-6 py-4">{{ product.inStock ? 'Yes' : 'No' }}</td>
+        <td class="px-6 py-4"><mat-icon class="text-red-600" (click)="deleteProduct(product.id)">delete</mat-icon></td>
       </tr>
     </tbody>
   </table>

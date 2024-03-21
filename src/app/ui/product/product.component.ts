@@ -45,7 +45,7 @@ loggedUser:any;
           this.singleProduct=false
         },
       error:(error)=>{
-        this.toastr.error("Unable to order the product");
+      
         throw error.message
       }
       })

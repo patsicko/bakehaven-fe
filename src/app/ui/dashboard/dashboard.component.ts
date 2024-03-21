@@ -132,6 +132,20 @@ this.productService.deleteOrder(id).subscribe({
 })
 }
 
+deleteProduct(id:number){
+this.productService.deleteProduct(id).subscribe({
+  next:(result)=>{
+    this.getProducts()
+    this.toastr.success("product deleted successfully")
+    return result
+  },
+  error:(error)=>{
+    this.toastr.error("failed to delete product")
+    throw error.message
+  }
+})
+}
+
 backHome(){
   this.router.navigate(['/home']).then(() => {
              
