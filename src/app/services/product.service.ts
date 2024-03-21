@@ -52,4 +52,28 @@ getOrders():Observable<any>{
     })
   )
 }
+
+approveOrder(id:number):Observable<any>{
+  return this.http.patch(`${this.appUrl}/order/approve/${id}`,{headers:this.headers}).pipe(
+    tap(result=>{
+      return result
+    })
+  )
+}
+
+cancelOrder(id:number):Observable<any>{
+  return this.http.patch(`${this.appUrl}/order/cancel/${id}`,{headers:this.headers}).pipe(
+    tap(result=>{
+      return result
+    })
+  )
+}
+
+deleteOrder(id:number):Observable<any>{
+  return this.http.delete(`${this.appUrl}/order/${id}`,{headers:this.headers}).pipe(
+    tap(result=>{
+      return result;
+    })
+  )
+}
 }

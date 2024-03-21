@@ -46,6 +46,7 @@ constructor(
         next:(result=>{
          
           console.log("loginResult",result.user);
+          
           localStorage.setItem("logedUser",JSON.stringify(result.user));
           if(result.user.role==='admin'){
             console.log("this is admin",result.user);

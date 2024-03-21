@@ -41,7 +41,8 @@ loggedUser:any;
       this.productService.createOrder(order).subscribe({
         next:(result)=>{
           console.log("created order",result);
-          this.toastr.success("Your order is successfull, we will contact you for delivery soon")
+          this.toastr.success("Your order is successfull, we will contact you for delivery soon");
+          this.singleProduct=false
         },
       error:(error)=>{
         this.toastr.error("Unable to order the product");
@@ -126,61 +127,6 @@ loggedUser:any;
       "rating": null,
       "inStock": false,
       "imageUrl": "../../../assets/download (5).jpeg"
-    },
-    {
-      "id": 3,
-      "name": "sambusa",
-      "category": "cakes",
-      "description": "",
-      "quantity": 10,
-      "price": 500,
-      "rating": null,
-      "inStock": false,
-      "imageUrl": "../../../assets/download (3).jpeg"
-    },
-    {
-      "id": 4,
-      "name": "cake",
-      "category": "cakes",
-      "description": "",
-      "quantity": 5,
-      "price": 500,
-      "rating": null,
-      "inStock": false,
-      "imageUrl": "../../../assets/download (1).jpeg"
-    },
-    {
-      "id": 5,
-      "name": "small cake",
-      "category": "cakes",
-      "description": "sweet product",
-      "quantity": 5,
-      "price": 500,
-      "rating": null,
-      "inStock": false,
-      "imageUrl": "../../../assets/download (1).jpeg"
-    },
-    {
-      "id": 6,
-      "name": "small cake",
-      "category": "cakes",
-      "description": "sweet product",
-      "quantity": 5,
-      "price": 500,
-      "rating": null,
-      "inStock": false,
-      "imageUrl": "../../../assets/weeding.png"
-    },
-    {
-      "id": 7,
-      "name": "small cake",
-      "category": "cakes",
-      "description": "sweet product",
-      "quantity": 5,
-      "price": 500,
-      "rating": null,
-      "inStock": false,
-      "imageUrl": "../../../assets/weeding.png"
     }
   ]
 

@@ -90,9 +90,9 @@
               <td class="px-6 py-4">{{ ord.user.firstName }} {{ ord.user.lastName }}</td>
               <td class="px-6 py-4">{{ ord.totalPrice }}</td>
               <td class="px-6 py-4">{{ ord.status }}</td>
-              <td><button>Approve</button></td>
-              <td><button>Cancel</button></td>
-              <td><button>Delete</button></td>
+              <td><button (click)="approveOrder(ord.id)" *ngIf="ord.status==='pending'">Approve</button></td>
+              <td><button (click)="cancelOrder(ord.id)" *ngIf="ord.status==='pending'">Cancel</button></td>
+              <td><button (click)="deleteOrder(ord.id)" ><mat-icon class="text-red-600">delete</mat-icon></button></td>
             </tr>
           </tbody>
     </table>
