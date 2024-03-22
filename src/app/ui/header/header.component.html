@@ -3,9 +3,14 @@
 <app-login *ngIf="showLoginForm"></app-login>
 <app-product-form *ngIf="showProductForm"></app-product-form>
 
-<div class="bg-[#826D5E] p-8 text-white text-2xl flex items-center justify-around z-50 ">
+<button mat-icon-button (click)="toggleMenu()" class="flex items-start justify-center mt-3 md:hidden">
+    <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+</button>
+
+<div *ngIf="isMenuOpen" class="bg-[#826D5E] p-8 text-white text-2xl  flex md:hidden items-center justify-around z-50 ">
   
-    <ul class="flex flex-col md:flex-row  items-center justify-center gap-16">
+  
+    <ul class="flex flex-col w-1/2 md:w-full md:flex-row  items-center justify-center gap-16">
         <li><a routerLink="home">Home</a></li>
         <li><a routerLink="about">About</a></li>
         <li><a routerLink="product">Product</a></li>
@@ -15,11 +20,36 @@
     <ul class="flex flex-col md:flex-row items-center justify-between gap-8 ">
         <li *ngIf="!isLogged"><button (click)="showSignup(true)">Signup</button></li>
         <li *ngIf="!isLogged"><button (click)="showLogin(true)">Login</button></li>
-        <div>
+        <div class="flex">
             <mat-icon>shopping_cart</mat-icon>
             {{cartItems.length}}
         </div>
         <li *ngIf="isLogged&&loggedUser ">Welcome {{loggedUser.firstName[0]}}. {{loggedUser.lastName}}</li>
+        <li *ngIf="messages"><mat-icon>notifications</mat-icon> <span class="text-red-600 text-xl font-bold " *ngIf="notifications">{{notifications}}</span></li>
+        <li *ngIf="isLogged&&loggedUser "><button (click)="logout()">Logout</button></li>
+    </ul>
+ 
+</div>
+
+
+<div  class="bg-[#826D5E] p-4 text-white text-2xl hidden  md:flex items-center justify-around z-50 ">
+  
+  
+    <ul class="flex flex-col w-1/2 md:w-full md:flex-row  items-center justify-center gap-16">
+        <li><a routerLink="home">Home</a></li>
+        <li><a routerLink="about">About</a></li>
+        <li><a routerLink="product">Product</a></li>
+        <li><a routerLink="gallery">Gallery</a></li>
+        <li><a routerLink="contact">Contact</a></li>
+    </ul>
+    <ul class="flex flex-col md:flex-row items-center justify-between gap-4 ">
+        <li *ngIf="!isLogged"><button (click)="showSignup(true)">Signup</button></li>
+        <li *ngIf="!isLogged"><button (click)="showLogin(true)">Login</button></li>
+        <div class="flex">
+            <mat-icon>shopping_cart</mat-icon>
+            {{cartItems.length}}
+        </div>
+        <li class="text-sm" *ngIf="isLogged&&loggedUser ">Welcome {{loggedUser.firstName[0]}}. {{loggedUser.lastName}}</li>
         <li *ngIf="messages"><mat-icon>notifications</mat-icon> <span class="text-red-600 text-xl font-bold " *ngIf="notifications">{{notifications}}</span></li>
         <li *ngIf="isLogged&&loggedUser "><button (click)="logout()">Logout</button></li>
     </ul>

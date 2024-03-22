@@ -25,9 +25,12 @@ export class HeaderComponent implements OnInit{
   loggedUser:any;
   notifications:number;
   messages:any
+  isMenuOpen: boolean = false;
  
 
-
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
   ngOnInit(): void {
     const loggedUser = this.authService.getLoggedUser();
